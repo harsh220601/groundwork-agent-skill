@@ -1,0 +1,57 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  skill:
+    name: Skill structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/validate_skill.py
+
+  python-exercises:
+    name: Python — ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - exercises/bug-hunt
+          - exercises/broken-build
+          - stress-tests/haiku-bughunt
+          - stress-tests/haiku-retest
+          - stress-tests/haiku-feature
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unittest suite
+        working-directory: ${{ matrix.project }}
+        run: python3 -m unittest discover -s tests -v
+
+  zod-exercise:
+    name: JavaScript — Zod config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: exercises/zod-config/package-lock.json
+      - name: Install dependencies
+        working-directory: exercises/zod-config
+        run: npm ci --ignore-scripts
+      - name: Run checks
+        working-directory: exercises/zod-config
+        run: node test.mjs

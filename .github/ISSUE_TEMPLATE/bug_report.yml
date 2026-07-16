@@ -1,0 +1,43 @@
+name: Bug report
+description: Report incorrect guidance, broken installation, or a reproducible skill failure.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Groundwork. Do not include credentials or private code.
+  - type: input
+    id: harness
+    attributes:
+      label: Agent harness and model
+      description: Include versions when available.
+      placeholder: Codex, Claude Code, or another Agent Skills-compatible harness
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Task and observed behavior
+      description: What task was given, and what did the agent do incorrectly?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Which Groundwork rule or outcome should have applied?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction and evidence
+      description: Provide a minimal safe reproduction, commands, and relevant output.
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Groundwork revision
+      description: Commit SHA, release, or installation date.

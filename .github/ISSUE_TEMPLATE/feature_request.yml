@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a new protocol, compatibility improvement, or evidence-backed refinement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What observed engineering-agent failure or workflow gap should be addressed?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link or describe the reproducible trace, evaluation, or authoritative source.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest change and where it belongs.
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Tradeoffs and compatibility
+      description: Note token cost, portability concerns, or weaker-model behavior.

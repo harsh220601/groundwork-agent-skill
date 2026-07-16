@@ -1,0 +1,4 @@
+interface:
+  display_name: "Groundwork"
+  short_description: "Evidence-first software engineering workflow"
+  default_prompt: "Use $groundwork to complete this software task with evidence-first verification."
