@@ -31,6 +31,9 @@ loaded only when needed from [`groundwork/references/`](groundwork/references/).
 ## Install
 
 The installable skill is the entire [`groundwork/`](groundwork/) directory.
+For a ready-to-upload package, download
+[`groundwork.zip`](https://github.com/harsh220601/groundwork-agent-skill/releases/latest/download/groundwork.zip)
+from the latest release.
 
 ### Codex
 
