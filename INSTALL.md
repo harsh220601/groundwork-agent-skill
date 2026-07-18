@@ -16,6 +16,14 @@ supports the standard. Everything below was checked against the official docs on
 - To share across a team, commit `.claude/skills/groundwork/` to the repo, or distribute via a
   Claude Code plugin (a `skills/` directory inside the plugin).
 
+## Claude Projects (chat-only — the reasoning layer without a harness)
+
+- Open Claude: Projects → New Project → paste the entire contents of
+  `fable-standing-orders.md` into the Project instructions box → Save.
+- Every chat inside that project now loads the standing orders before reading your message,
+  with any model. This installs only the reasoning layer — the engineering loop, references,
+  and project map/log machinery need a code-capable harness (sections below).
+
 ## claude.ai (web/desktop)
 
 - Zip the folder: `cd <parent-of-groundwork> && zip -r groundwork.zip groundwork`

@@ -88,3 +88,32 @@ contradiction removed + mechanical suite-count gate), and the round-2 run demons
 corrected behavior end-to-end. Remaining known limits are recorded in HONEST-LIMITS.md rather
 than papered over: cosmetic template drift on weak models, and triggering being ultimately
 harness-dependent (mitigated via INSTALL.md guidance).
+
+## Round 3 — Standing-orders reasoning layer (v2, 2026-07-18)
+
+Built `fable-standing-orders.md` (10 areas + Final Gate, extracted from Claude Fable 5) and
+merged it into the skill as `references/standing-orders.md` with a bridging preamble.
+
+- Red-before-green: `scripts/validate_standing_orders.py` was written first and observed
+  failing (3 errors: both copies missing, SKILL.md not routing), then green after the build.
+  It is now part of the CI validate workflow.
+- Behavioral test: 5 trap tasks (false premise, planted 12%-growth error, vague ask,
+  fictional court case, buried multi-part constraints) were run by Opus-model agents whose
+  ONLY instructions were the document; strict judges graded 5/5 pass — premise corrected
+  first, 13.6% recomputed with the derivation shown, reading stated before rewriting,
+  citation refused with a retrieval path and zero fabrication, both buried date occurrences
+  fixed at a verified 113/120 words.
+- Adversarial critique: 4 lenses (executability, examples, ruthless-length,
+  groundwork-consistency) produced 18 findings; independent skeptics confirmed 10 and
+  rejected 8. Applied 8 fixes: enumerable ask-vs-proceed gate, two-detail test replacing the
+  introspective "blur" trigger, environment-pull carve-out in area 8(b), three examples
+  rewritten as narrated catches, two redundant passages cut, preamble compressed. Dismissed
+  1 (deleting the "Prevents:" lines would violate the extraction contract). Applied 1 in
+  compressed form (the orders-not-advice stance kept to one clause).
+- Post-fix retest: the two traps governed by the revised areas (vague ask → area 1;
+  fictional case → area 8) were re-simulated against the revised document on
+  claude-opus-4-8 agents — the replacement model the document targets — and passed 2/2:
+  state-and-proceed with the inverted "received by you" premise flagged (area 1), and
+  pull-first via web search, then a three-part refusal with zero fabrication for the
+  phantom case (area 8b); the judge independently verified the adjacent real-case facts
+  the reply offered.

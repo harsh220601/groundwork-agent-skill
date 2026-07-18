@@ -10,7 +10,9 @@ useful project knowledge behind.
 
 It is designed for software tasks including feature work, debugging, failing builds, code
 review, unfamiliar-codebase exploration, API research, refactoring, configuration, and
-performance work.
+performance work. Since v2 it also ships a **standing-orders reasoning layer** — extracted
+from Claude Fable 5 as its handoff to successor models — that governs any answer a user will
+act on, code or not.
 
 ## Why Groundwork?
 
@@ -77,11 +79,33 @@ Before any engineering task, read groundwork/SKILL.md and follow it, including t
 reference files it routes to.
 ```
 
+## The standing-orders layer (Fable Brain)
+
+[`fable-standing-orders.md`](fable-standing-orders.md) is a self-contained set of reasoning
+orders written by Claude Fable 5 for the model that replaces it: 10 areas (reading intent,
+decomposition, effort placement, verification, Certain/Likely/Assumption claim markers,
+self-attack, completeness, refusing to guess, delivery, and ten fake-competence patterns with
+tells and counters), ending in a Final Gate checklist run on every answer before sending.
+
+It ships in two forms that are kept in sync:
+
+- **Standalone** — [`fable-standing-orders.md`](fable-standing-orders.md), for pasting
+  directly into a model's system instructions. In Claude: *Projects → New Project → paste the
+  whole file into Project instructions → Save*, then chat inside that project with any model.
+- **Inside the skill** — [`groundwork/references/standing-orders.md`](groundwork/references/standing-orders.md),
+  routed from `SKILL.md` with a bridge that unifies the claim systems (VERIFIED ↔ Certain,
+  ASSUMED ↔ Assumption, UNKNOWN ↔ refusal-with-a-path).
+
+60-second install test: ask a 3-part question containing one false premise. A correct install
+corrects the premise first, answers all three parts, marks claims Certain / Likely /
+Assumption, and ends with a Risks section.
+
 ## What is included?
 
 | Path | Purpose |
 | --- | --- |
 | [`groundwork/`](groundwork/) | Installable skill and routed reference protocols |
+| [`fable-standing-orders.md`](fable-standing-orders.md) | Standalone reasoning orders for direct paste into system instructions |
 | [`exercises/`](exercises/) | Reproducible Python and JavaScript engineering exercises |
 | [`traces/`](traces/) | Worked bug-hunt, feature, research, and broken-build traces |
 | [`stress-tests/`](stress-tests/) | Triggering and weaker-model evaluation artifacts |
@@ -96,6 +120,7 @@ The traces and reports are development evidence, not timeless benchmark claims. 
 
 ```bash
 python3 scripts/validate_skill.py
+python3 scripts/validate_standing_orders.py
 (cd exercises/bug-hunt && python3 -m unittest discover -s tests -v)
 (cd exercises/broken-build && python3 -m unittest discover -s tests -v)
 (cd exercises/zod-config && npm ci --ignore-scripts && node test.mjs)

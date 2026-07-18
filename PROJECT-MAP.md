@@ -1,0 +1,61 @@
+# Project Map — groundwork-agent-skill
+Updated: 2026-07-18 | Verified against: `python3 scripts/validate_skill.py && python3 scripts/validate_standing_orders.py` → both pass
+
+## What this is
+Public repository of the Groundwork Agent Skill: an evidence-first engineering methodology
+for coding agents, plus (v2) the Fable standing-orders reasoning layer that governs any
+answer a user will act on, code or not.
+
+## Intended behavior
+The installable skill is the `groundwork/` directory (SKILL.md + references/ +
+agents/openai.yaml), portable per the Agent Skills standard. `fable-standing-orders.md` at
+the root is the standalone form of the reasoning layer, for pasting directly into a model's
+system instructions (e.g. Claude Projects); `groundwork/references/standing-orders.md` is the
+in-skill form. The two forms share identical area/gate content and differ only in preamble.
+
+## Commands (run from repo root)
+- Validate skill structure: `python3 scripts/validate_skill.py` →
+  "Validated groundwork: 7 references, 243 SKILL.md body lines" (verified 2026-07-18)
+- Validate standing orders: `python3 scripts/validate_standing_orders.py` →
+  "Validated standing orders: root + reference copies, 10 areas, final gate" (verified 2026-07-18)
+- Python suites: `(cd <dir> && python3 -m unittest discover -s tests)` for
+  exercises/bug-hunt, exercises/broken-build, stress-tests/haiku-{bughunt,retest,feature}
+  → all OK (verified 2026-07-18)
+- Zod exercise: `(cd exercises/zod-config && npm ci --ignore-scripts && node test.mjs)`
+  (untested this session; runs in CI)
+
+## Architecture at a glance
+`groundwork/SKILL.md` (entry; body <500 lines enforced) routes to
+`groundwork/references/*.md`, loaded on demand; the validator enforces bidirectional
+linking. `scripts/*.py` validate structure; `.github/workflows/validate.yml` runs the
+validators plus all exercise/stress suites on every push and PR. `exercises/`,
+`stress-tests/`, and `traces/` are reproducible evidence artifacts, not part of the
+installed skill.
+
+## Where things live (curated)
+- groundwork/SKILL.md — skill entry: five non-negotiables, the Loop, claim tags, routing
+- groundwork/references/standing-orders.md — reasoning layer, in-skill form (bridged tags)
+- fable-standing-orders.md — reasoning layer, standalone paste-into-instructions form
+- scripts/validate_skill.py — structure contract for the skill directory
+- scripts/validate_standing_orders.py — structure contract for the standing-orders pair
+- README.md / INSTALL.md — install paths, including Claude Projects for the standalone form
+- test-report.md — behavioral test evidence for each revision round
+
+## Invariants and gotchas
+- SKILL.md frontmatter must be exactly `name` + `description`, name == "groundwork",
+  description ≤ 1024 chars, body < 500 lines — validate_skill.py fails otherwise.
+- Every `groundwork/references/*.md` must be linked from SKILL.md body and vice versa;
+  adding a reference file without a SKILL.md link breaks CI.
+- The two standing-orders forms must keep identical content from "## 1. Reading intent"
+  onward. Edit the ROOT file, then regenerate the reference by replacing everything from
+  that heading on (validate_standing_orders.py checks both files).
+- The ten "Prevents:" lines and the literal gate rule "fix and re-check. Never send anyway."
+  are contract text — the validator greps for them; do not "clean them up".
+- No .zip or .DS_Store may be committed (validate_skill.py forbids generated artifacts).
+
+## Decisions
+- 2026-07-18 Shipped the standing-orders reasoning layer inside the existing skill (two
+  synced forms) instead of as a second skill — one install, one trigger surface, bridged
+  claim vocabularies (VERIFIED ↔ Certain, ASSUMED ↔ Assumption, UNKNOWN ↔ refuse-with-path).
+- 2026-07-18 Kept the "Prevents:" lines despite a length-lens critique — they are required
+  by the extraction contract the document answers (see test-report.md round 3).

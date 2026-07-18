@@ -1,4 +1,4 @@
 interface:
   display_name: "Groundwork"
-  short_description: "Evidence-first software engineering workflow"
+  short_description: "Evidence-first engineering workflow with a standing-orders reasoning layer"
   default_prompt: "Use $groundwork to complete this software task with evidence-first verification."

@@ -1,6 +1,6 @@
 ---
 name: groundwork
-description: Evidence-first engineering methodology that makes a coding agent work and verify like a senior engineer. Use for ANY software task - writing code, building features, debugging, fixing bugs or failing tests, repairing broken builds or red CI, refactoring, code review, investigating errors, exploring or onboarding onto an unfamiliar codebase, researching a library/API/framework, scripting, configuration, performance work. Also use when about to state facts about code or APIs, when tests pass but confidence is low, when a task seems done, or on first contact with any repository. Provides a verification loop, an anti-hallucination protocol with claim tagging, a debugging playbook, a deep-research protocol, and a project map + learnings log that make every session smarter than the last.
+description: Evidence-first engineering methodology that makes a coding agent work and verify like a senior engineer. Use for ANY software task - writing code, building features, debugging, fixing bugs or failing tests, repairing broken builds or red CI, refactoring, code review, investigating errors, exploring or onboarding onto an unfamiliar codebase, researching a library/API/framework, scripting, configuration, performance work. Also use when about to state facts about code or APIs, when tests pass but confidence is low, when a task seems done, or on first contact with any repository. Provides a verification loop, an anti-hallucination protocol with claim tagging, a debugging playbook, a deep-research protocol, and a project map + learnings log that make every session smarter than the last. Includes the standing-orders reasoning layer for any answer, code or not: intent reading, Certain/Likely/Assumption markers, self-attack, completeness, refusal rules, and a final gate before sending.
 ---
 
 # Groundwork
@@ -153,6 +153,18 @@ examples: [references/anti-hallucination-protocol.md](references/anti-hallucinat
 | First contact with a repo | Step zero above; build the map | [references/project-map-spec.md](references/project-map-spec.md) |
 | A bug was just root-caused | Write the log entry now, not later | [references/learnings-log-spec.md](references/learnings-log-spec.md) |
 | About to say "done" | Hostile review + ledger reconciliation | [references/self-testing-loop.md](references/self-testing-loop.md) |
+| Any answer the user will act on (code or not) | Standing orders: mark claims, run the Final Gate | [references/standing-orders.md](references/standing-orders.md) |
+
+## The reasoning layer — standing orders
+
+Groundwork's loop governs how you change code; the standing orders in
+[references/standing-orders.md](references/standing-orders.md) govern how you reason and
+answer — on every task, including pure question-answering with no repository. Read them and
+run their Final Gate on any substantive answer before sending. The two tag systems are one
+system: VERIFIED ↔ Certain (engineering Certain still requires attached evidence), ASSUMED ↔
+Assumption, UNKNOWN ↔ area 8's refusal-with-a-path; Likely exists only for claims genuinely
+uncheckable from your environment — if you can check it, check it. Loop step 6 reviews the
+change you made; the Final Gate reviews the message you send. Run both.
 
 ## Stuck and uncertainty rules
 
