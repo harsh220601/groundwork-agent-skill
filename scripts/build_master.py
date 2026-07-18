@@ -36,9 +36,15 @@ Single-file edition of https://github.com/harsh220601/groundwork-agent-skill.*
 1. **Direct (any agent, zero setup):** put this entire file where your agent reads standing
    instructions (system prompt, AGENTS.md, CLAUDE.md, rules file, project instructions). It
    is written to be followed as-is; internal links point at sections of this same file.
-2. **As a skill (skills-capable harness):** recreate the folder layout —
-   `groundwork/SKILL.md` gets Part II's content (everything between the "Part II" heading
-   and "Part III"), topped with this frontmatter:
+2. **As a skill (skills-capable harness):** every part of this file gets used — nothing is
+   dropped. The entry file the agent always loads is Part II; Parts I and III become the
+   reference files it routes to on demand (progressive disclosure):
+
+   | Section of this file | Becomes |
+   | --- | --- |
+   | Part II — Groundwork | `groundwork/SKILL.md`, topped with the frontmatter below |
+   | Part I — Standing Orders | `groundwork/references/standing-orders.md` |
+   | Part III — each appendix | `groundwork/references/<its-id>.md` (its `<a id="...">` tag names the file) |
 
    ```
    ---
@@ -47,10 +53,8 @@ Single-file edition of https://github.com/harsh220601/groundwork-agent-skill.*
    ---
    ```
 
-   `groundwork/references/<id>.md` gets one file per `<a id="...">` tag below: Part I
-   becomes `references/standing-orders.md`, each appendix becomes `references/<its-id>.md`.
    Then change every `(#<id>)` link back to `(references/<id>.md)`. Or skip the surgery:
-   clone the repo above — its `groundwork/` folder is this exact content in skill form.
+   clone the repo above — its `groundwork/` folder is this exact content already split.
 3. **Chat-only:** Part I (Standing Orders) alone works as system instructions for a
    non-coding assistant — in that deployment, skip Part I's "How this composes" block.
 
@@ -118,7 +122,7 @@ def verify(doc: str) -> None:
     anchors = set(re.findall(r'<a id="([a-z-]+)"></a>', doc))
     assert links <= anchors, f"links without anchors: {links - anchors}"
     assert not re.search(r"\]\(references/", doc), "unrewritten reference link remains"
-    assert doc.count("SKILL.md") == 1, "dangling SKILL.md mention outside the header"
+    assert "SKILL.md" not in doc[doc.index("# Part I —"):], "dangling SKILL.md mention outside the header"
     for must in [
         "## The five non-negotiables",
         "## 1. Reading intent",
