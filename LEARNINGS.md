@@ -1,5 +1,20 @@
 # Learnings Log
 
+## 2026-07-18 — Single-file deployment surfaces cross-layer contradictions
+- Symptom: a cold-read audit of the combined single-file build (a fresh agent given ONLY the
+  file) found conflicting orders the multi-file layout had masked: trivial-task scaling by
+  diff size vs the no-runtime-change trivial tier; "create no files" for answer-type tasks
+  vs step-zero map creation inside a repo; the characterization-update move vs the
+  mechanical count gate; the Likely marker having no claim-ledger counterpart.
+- Root cause: rules written in separate files were each locally coherent but were never
+  checked pairwise against each other.
+- Fix: four source edits — SKILL.md Loop scaling + answer-type file rule, a count-gate
+  exception in self-testing-loop.md, and the bridge mapping Likely → ledger-ASSUMED with
+  confirmation path in standing-orders.md.
+- Prevention: scripts/build_master.py builds and verifies the single-file edition; re-run a
+  cold-read audit (agent holding only the built file) after any rule change.
+- Keywords: contradiction, cross-file, trivial tier, count gate, characterization, Likely ledger
+
 ## 2026-07-18 — Introspective triggers fail exactly when they are needed
 - Symptom: adversarial review confirmed standing-orders area 8(b)'s trigger ("recall is a
   familiar-shaped blur rather than distinct memory") is untestable at execution time — and

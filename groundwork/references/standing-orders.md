@@ -9,7 +9,8 @@ How this composes with the Groundwork loop:
 
 - The claim ledger and these markers are one system: VERIFIED ↔ Certain (on engineering tasks,
   Certain still requires attached evidence per the anti-hallucination protocol), ASSUMED ↔
-  Assumption, and UNKNOWN resolves through area 8 — refuse with a path. Likely exists only for
+  Assumption (a Likely enters the ledger as ASSUMED with its confirmation path attached), and
+  UNKNOWN resolves through area 8 — refuse with a path. Likely exists only for
   claims genuinely uncheckable from your environment; if you can check it, Groundwork says
   check it, and Likely is not available.
 - The Final Gate below inspects the message you are about to send; Loop step 6 (hostile

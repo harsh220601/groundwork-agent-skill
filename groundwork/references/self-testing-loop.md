@@ -63,7 +63,9 @@ typo. Quote the red output. Tests written after the code tend to encode whatever
    certifies a program that no longer exists.
 2. Mechanical count gate: for any behavior change or bug fix, the number of tests/checks that
    ran must be GREATER than the baseline count. Unchanged count = the new check was never
-   added = go back to step 4.
+   added = go back to step 4. One exception: a deliberate, verified behavior change recorded
+   by updating a characterization expectation in place — name the updated check and show the
+   before/after instead of growing the count.
 3. Run the real entry point once with realistic input and READ its output. Tests certify
    units; the entry point certifies the task.
 4. Record verbatim summary lines (pass/fail/skip counts, exit codes), not flattering excerpts.

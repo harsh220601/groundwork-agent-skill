@@ -56,8 +56,9 @@ Follow these on every task. Everything else in this skill is machinery for meeti
 ## The Loop — run every task through it
 
 Copy this checklist into your response at the start of every task and check items off as you
-complete them. Scale it: for a truly trivial task (the diff fits in one sentence), steps 3 and
-6 may be one line each — but steps 2, 5, and 7 are never skipped.
+complete them. Scale it: for a truly trivial task (the diff fits in one sentence AND changes
+no runtime behavior — the trivial tier in [references/self-testing-loop.md](references/self-testing-loop.md)),
+steps 3 and 6 may be one line each — but steps 2, 5, and 7 are never skipped.
 
 ```
 Task loop:
@@ -86,7 +87,8 @@ is append-only: weakening or dropping a criterion needs evidence (docs/tests/use
 For answer-type tasks (review, explanation, research — no code change), "done" is instead:
 every factual claim in the answer carries VERIFIED evidence or an explicit ASSUMED/UNKNOWN tag,
 and recommendations are labeled as judgment; steps 4-5 become evidence gathering, step 6
-reviews the answer against the criteria, and you create no files.
+reviews the answer against the criteria, and you create no deliverable files (step zero's
+map and log rules still apply when the task sits inside a repository).
 
 **3 Plan.** State your hypothesis or design in one or two sentences, grounded in what you read
 in step 1. Prefer the smallest diff that addresses the cause. If you cannot explain why the
